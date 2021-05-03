@@ -46,13 +46,12 @@ def tutorial_taskflow_api_etl():
        return {"total_order_value": total_order_value}
 
    @task()
-   def load(total_order_value: float):
-
-       print("Total order value is: %.2f" % total_order_value)
+   def load(order_summary):
+       print("Total order value is: %.2f" % order_summary["total_order_value"])
 
    order_data = extract()
    order_summary = transform(order_data)
-   load(order_summary["total_order_value"])
+   load(order_summary)
 
 tutorial_etl_dag = tutorial_taskflow_api_etl()
 ```
